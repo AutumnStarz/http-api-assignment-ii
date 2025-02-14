@@ -1,16 +1,7 @@
 // i pulled code from the last api asignment
-//remember to use let instead of const 
+// remember to use let instead of const
 
 const users = {};
-
-const convertObjectToXML = (object) => {
-  let xml = '<response>';
-  for (const key in object) {
-    xml += `<${key}>${object[key]}</${key}>`;
-  }
-  xml += '</response>';
-  return xml;
-};
 
 // helper function to respond to requests with the appropriate content type.
 const respond = (request, response, status, object) => {
@@ -18,7 +9,6 @@ const respond = (request, response, status, object) => {
   let contentType = 'application/json';
   if (request.headers.accept && request.headers.accept.includes('text/xml')) {
     contentType = 'text/xml';
-    responseContent = convertObjectToXML(object);
   } else {
     responseContent = JSON.stringify(object);
   }
@@ -77,13 +67,18 @@ const addUser = (request, response) => {
   });
 };
 
-// bruh how did you get here
+// GET /notReal:
 const notFound = (request, response) => {
   const responseJSON = {
     id: 'notFound',
     message: 'The page you are looking for was not found.',
   };
-  respond(request, response, 404, responseJSON);
+  if (request.method === 'HEAD') {
+    response.writeHead(404, { 'Content-Type': 'application/json' });
+    response.end();
+  } else {
+    respond(request, response, 404, responseJSON);
+  }
 };
 
 module.exports = {
