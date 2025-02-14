@@ -1,5 +1,6 @@
+// this is literally just pulled from the lasy api assignment
+
 const fs = require('fs');
-// const http = require('http');
 
 const index = fs.readFileSync(`${__dirname}/../client/client.html`);
 
