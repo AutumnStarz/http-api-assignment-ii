@@ -3,7 +3,6 @@
 
 const users = {};
 
-// helper function to respond to requests with the appropriate content type.
 const respond = (request, response, status, object) => {
   let responseContent = '';
   let contentType = 'application/json';
@@ -17,7 +16,7 @@ const respond = (request, response, status, object) => {
     'Content-Length': Buffer.byteLength(responseContent, 'utf8'),
   };
   response.writeHead(status, headers);
-  if (request.method !== 'HEAD') { // check for head request
+  if (request.method !== 'HEAD') { // check for head reques
     response.write(responseContent);
   }
   response.end();
@@ -38,7 +37,7 @@ const addUser = (request, response) => {
     body += chunk;
   });
   request.on('end', () => {
-    const bodyParams = new URLSearchParams(body); // parse the body content
+    const bodyParams = new URLSearchParams(body); // parse the body cotent
     const name = bodyParams.get('name');
     const age = bodyParams.get('age');
 
