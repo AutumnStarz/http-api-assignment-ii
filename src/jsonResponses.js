@@ -38,15 +38,15 @@ const addUser = (request, response) => {
     body += chunk;
   });
   request.on('end', () => {
-    const bodyParams = new URLSearchParams(body);
+    const bodyParams = new URLSearchParams(body); // parse the body content
     const name = bodyParams.get('name');
     const age = bodyParams.get('age');
 
-    // make sure both name and age are provided bruh
+    // make sure both name and age are provided 
     if (!name || !age) {
       const responseJSON = {
         id: 'missingParams',
-        message: 'Name and age are both required.',
+        message: 'Name and age are both required!',
       };
       return respond(request, response, 400, responseJSON);
     }
@@ -67,7 +67,7 @@ const addUser = (request, response) => {
   });
 };
 
-// GET /notReal:
+// GET /notReal
 const notFound = (request, response) => {
   const responseJSON = {
     id: 'notFound',
