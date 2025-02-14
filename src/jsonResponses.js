@@ -22,7 +22,7 @@ const respond = (request, response, status, object) => {
   response.end();
 };
 
-// GET /getUsers:
+// GET /getUsers
 const getUsers = (request, response) => {
   const responseJSON = {
     users,
@@ -30,7 +30,7 @@ const getUsers = (request, response) => {
   respond(request, response, 200, responseJSON);
 };
 
-// POST /addUser:
+// POST /addUser
 const addUser = (request, response) => {
   let body = '';
   request.on('data', (chunk) => {
